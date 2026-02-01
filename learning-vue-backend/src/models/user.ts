@@ -1,10 +1,17 @@
 import { ObjectId } from "mongodb";
+import Entity from './entity.ts'
 
-export default class User{
-    constructor(
-        public id: ObjectId,
-        public username: string, 
-        public role: string,
-        public email: number, 
-        public dateofbirth: Date) {}
+export class User extends Entity {
+  constructor(
+    public name: string,
+    public email: string,
+    public role: UserRole,
+    public cvId?: ObjectId,
+    id?: ObjectId,
+    createdAt?: Date,
+    updatedAt?: Date
+  ) {
+    super(id, createdAt, updatedAt);
+  }
 }
+export type UserRole = 'jobSeeker' | 'recruiter' | 'admin';

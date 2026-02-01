@@ -14,7 +14,7 @@ services:
       context: ./learning-vue-frontend
       dockerfile: Dockerfile
     ports:
-      - '5000:5000'
+      - '5173:5173'
 
   mongo_db:
     container_name: MongoDB
