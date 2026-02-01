@@ -1,12 +1,18 @@
 import express from "express";
-const app = express();
-const port = "3000";
+import { connectToDatabase } from "./shared/database/mongo";
 
-app.get("/", (req, res) => {
-  res.send("Hello World!");
-  console.log("Response sent");
-});
+async function startServer() {
+  await connectToDatabase();
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
+  const app = express();
+  app.use(express.json());
+
+  app.listen(3000, () => {
+    console.log("🚀 Server running on port 3000");
+  });
+}
+
+startServer().catch((err) => {
+  console.error("❌ Failed to start server", err);
+  process.exit(1);
 });

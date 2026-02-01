@@ -5,6 +5,8 @@ services:
     command: npm run dev
     ports:
       - '3000:3000'
+    depends_on:
+      - mongo_db
 
   frontend:
     container_name: vue-frontend
@@ -12,7 +14,7 @@ services:
       context: ./learning-vue-frontend
       dockerfile: Dockerfile
     ports:
-      - '5173:5173'
+      - '5000:5000'
 
   mongo_db:
     container_name: MongoDB
