@@ -1,18 +1,15 @@
 import { ObjectId } from "mongodb";
-import Entity from "./entity";
-import { Experience } from "./experience";
+import { Experience } from "../experience/experience.js";
 
-export class CV extends Entity {
+export class CV {
   constructor(
+    public id: ObjectId,
     public userId: ObjectId,
     public title: string,
     public summary: string,
     public experience: Experience[] = [],
     public skills: string[] = [],
-    id?: ObjectId,
-    createdAt?: Date,
-    updatedAt?: Date
   ) {
-    super(id, createdAt, updatedAt);
+ 
   }
 }

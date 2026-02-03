@@ -1,18 +1,25 @@
-import express from "express";
-import { connectToDatabase } from "./src/services/db.service.ts"
+import Express from "express";
+import { connectToDatabase } from "./src/services/db.service.js"
+import { vacanciesRouter } from './src/features/vacancy/vacancy.router.js';
 
-  const app = express();
-  app.use(express.json());
+  const app = Express();
+  app.use(Express.json());
 
-  app.listen(3000, connectToDatabase()
-    .then(() => {
-        app.listen(3000, () => {
-            console.log(`Server started`);
-        });
-    })
-    .catch((error) => {
-        console.error("Database connection failed", error);
-        process.exit();
-    })); 
+async function startServer() {
+  try {
+    await connectToDatabase();
+
+    app.use('/jobs', vacanciesRouter);
+
+    app.listen(3000, () => {
+      console.log('Server started on port 3000');
+    });
+  } catch (error) {
+    console.error('Database connection failed', error);
+    process.exit(1);
+  }
+}
+
+startServer();
 
 

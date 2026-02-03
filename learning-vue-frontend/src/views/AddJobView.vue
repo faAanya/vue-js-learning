@@ -1,10 +1,12 @@
-<script setup>
+<script setup lang="ts">
 import { reactive } from 'vue';
 import { useToast } from 'vue-toastification';
 import router from '@/router'
 import axios from 'axios';
 
-const form = reactive({
+import type Vacancy from '@/models/vacancy';
+
+const form = reactive<Vacancy>({
     type:'Full-Time',
     title:'',
     description:'',
@@ -35,13 +37,14 @@ const handleSubmit = async () =>{
         }
     }
     try{
-      const response = await axios.post('/api/jobs/', newJob);
+      const response = await axios.post<Vacancy>('/api/jobs/', newJob);
+
       toast.success('Job added successfully')
       router.push(`/jobs/${response.data.id}`);
     }
     catch(error){
         console.error('Error creating job', error);
-        toast.error('Job was nat added')
+        toast.error('Job was not added')
     }    
     
 }

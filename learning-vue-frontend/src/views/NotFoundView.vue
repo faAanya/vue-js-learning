@@ -15,5 +15,4 @@ import { RouterLink } from 'vue-router';
         Go Back
       </RouterLink>
     </section>
-
 </template>

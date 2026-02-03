@@ -1,8 +1,9 @@
 services:
   api:
     container_name: vue-backend
-    build: ./learning-vue-backend
-    command: npm run dev
+    build: 
+      context: ./learning-vue-backend
+      dockerfile: Dockerfile
     ports:
       - '3000:3000'
     depends_on:
